@@ -21,16 +21,26 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded( {extended: true}))
 
+app.use((req, res, next) => {
+
+    res.header('Access-Control-Allow-Origin', '*');
+    
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    
+    next();
+    
+});
+
+
+// carpeta publica (lo que se puede ver)
+app.use(express.static('uploads'))
+
 // rutas de la app
 app.use('/', routes())
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
-    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-    next();
-});
 
 
 // Definir un dominio(s) para recibir las peticiones
@@ -52,10 +62,6 @@ const CorsOptions = {
 // habilitar cors
 app.use(cors( CorsOptions ))
 
-
-
-// carpeta publica (lo que se puede ver)
-app.use(express.static('uploads'))
 
 const host = process.env.HOST || '0.0.0.0'
 const port = process.env.PORT || 5000
