@@ -21,6 +21,9 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded( {extended: true}))
 
+// rutas de la app
+app.use('/', routes())
+
 // Definir un dominio(s) para recibir las peticiones
 const whiteList = [process.env.FRONTEND_URL]
 
@@ -40,8 +43,7 @@ const CorsOptions = {
 // habilitar cors
 app.use(cors( CorsOptions ))
 
-// rutas de la app
-app.use('/', routes())
+
 
 // carpeta publica (lo que se puede ver)
 app.use(express.static('uploads'))
