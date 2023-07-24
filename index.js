@@ -24,6 +24,15 @@ app.use(bodyParser.urlencoded( {extended: true}))
 // rutas de la app
 app.use('/', routes())
 
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
+
 // Definir un dominio(s) para recibir las peticiones
 const whiteList = [process.env.FRONTEND_URL]
 
