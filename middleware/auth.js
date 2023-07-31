@@ -6,7 +6,6 @@ module.exports = ( req, res, next) => {
     // autorizacion por el header
     const authHeader = req.get('Authorization')
     
-
     if(!authHeader){
         const error = new Error('No autenticado, no hay JWT')
         error.statusCode = 401
@@ -22,6 +21,7 @@ module.exports = ( req, res, next) => {
         revisarToken = jwt.verify(token, 'SUPERSECRETO')
         
     } catch (error) {
+        console.log(error)
         error.statusCode = 500
         throw error
     }

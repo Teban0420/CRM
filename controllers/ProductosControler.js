@@ -6,7 +6,7 @@ const shortid = require('shortid');
 const fs = require('fs');
 
 const configuracionMulter = {
-    storage: fileStorage = multer.diskStorage({
+    storage: fileStorage = multer.diskStorage({ 
         destination: (req, file, cb) => {
             cb(null, __dirname + '../../uploads/');
         },

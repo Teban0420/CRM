@@ -19,22 +19,22 @@ module.exports = function() {
     router.put('/clientes/:id', auth, clienteControler.actualizarCliente)
     router.delete('/clientes/:id', auth, clienteControler.eliminarCliente)   
 
-    // PRODUCTOS ------------------
+    // PRODUCTOS ----------------------
     router.post('/productos', auth, ProductosControler.subirArchivo, ProductosControler.NuevoProducto)
     router.get('/productos', auth, ProductosControler.mostrarProductos)
     router.get('/productos/:id', auth, ProductosControler.mostrarProducto)
     router.put('/productos/:id', auth, ProductosControler.subirArchivo, ProductosControler.actualizarProducto)
     router.delete('/productos/:id', auth, ProductosControler.eliminarProducto)
-    router.post('/productos/busqueda/:query', auth, ProductosControler.buscarProducto)
+    router.post('/productos/busqueda/:query',  ProductosControler.buscarProducto)
 
-    // PEDIDOS --------------------
+    // PEDIDOS --------------------------------------
     router.post('/pedidos/:id', auth, pedidosControler.nuevoPedido)
     router.get('/pedidos', auth, pedidosControler.mostrarPedidos)
     router.get('/pedidos/:id', auth, pedidosControler.mostrarPedido)
     router.put('/pedidos/:id', auth, pedidosControler.actualizarPedido)
     router.delete('/pedidos/:id', auth, pedidosControler.eliminarPedido)
 
-    // USUARIOS -----------------------
+    // USUARIOS ---------------------------------------
     router.post('/crear-cuenta', auth,  UsuarioControler.registrarUsuario)
     router.post('/iniciar-sesion', UsuarioControler.autenticarUsuario)
 
